@@ -6,11 +6,9 @@
       <label for="inputPassword" class="sr-only">Password</label>
       <b-form-input type="password" id="inputPassword" placeholder="Password" required=""></b-form-input>
       <div class="checkbox mb-3">
-        <label>
-          <input type="checkbox" value="remember-me"> Remember me
-        </label>
+          <b-form-checkbox value="remember-me">Remember me</b-form-checkbox> 
       </div>
-      <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+      <b-button size="lg" variant="primary" block="true" type="submit">Sign in</b-button>
     </b-form>
 </template>
 

@@ -9,7 +9,7 @@
 
                 <b-navbar-nav>
                 <b-nav-item-dropdown text="My Team">
-                    <b-dropdown-item to="/login">Squad</b-dropdown-item>
+                    <b-dropdown-item to="#">Squad</b-dropdown-item>
                     <b-dropdown-item href="#">Starting Lineup</b-dropdown-item>
                     <b-dropdown-item href="#">Squad Statistics</b-dropdown-item>
                     <b-dropdown-divider></b-dropdown-divider>
@@ -33,7 +33,7 @@
                     <b-dropdown-item href="#">Users</b-dropdown-item>
                     <b-dropdown-item href="#">Teams</b-dropdown-item>
                 </b-nav-item-dropdown>
-                <b-nav-item to="/logout">Logout</b-nav-item>
+                <b-nav-item v-if="isLoggedIn" @click="logOut">Logout</b-nav-item>
                 </b-navbar-nav>
 
             </b-collapse>
@@ -45,7 +45,13 @@
 export default {
     data() {
         return {
-            isAdmin: true
+            isAdmin: true,
+            isLoggedIn: true
+        }
+    },
+    methods: {
+        logOut() {
+            this.isLoggedIn = false;
         }
     }
 }
