@@ -1,5 +1,10 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <b-container class="home">
+    <b-card  bg-variant="dark" text-variant="white" title="About">
+      <p class="card-text">
+        A temporary About page.
+      </p>
+      <b-button href="#" variant="primary">Go somewhere</b-button>
+    </b-card>
+  </b-container>
 </template>
