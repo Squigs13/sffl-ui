@@ -43,17 +43,17 @@
 
 <script>
 export default {
-    data() {
-        return {
-            isAdmin: true,
-            isLoggedIn: true
-        }
-    },
-    methods: {
-        logOut() {
-            this.isLoggedIn = false;
-        }
+  data () {
+    return {
+      isAdmin: true,
+      isLoggedIn: true
     }
+  },
+  methods: {
+    logOut () {
+      this.isLoggedIn = false
+    }
+  }
 }
 </script>
 
