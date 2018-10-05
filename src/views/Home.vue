@@ -6,3 +6,6 @@
     </b-jumbotron>
   </b-container>
 </template>
+<style>
+.home {text-align: center;}
+</style>
