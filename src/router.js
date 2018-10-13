@@ -35,6 +35,11 @@ export default new Router({
       path: '/players',
       name: 'players',
       component: () => import(/* webpackChunkName: "players" */ './views/Players.vue')
+    },
+    {
+      path: '/teams/:id',
+      name: 'teams',
+      component: () => import(/* webpackChunkName: "team" */ './views/Team.vue')
     }
   ]
 })

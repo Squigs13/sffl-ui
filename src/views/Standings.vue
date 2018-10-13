@@ -2,7 +2,13 @@
     <b-container>
         <b-card bg-variant="light"
                 header="Current Standings">
-            <b-table striped small :items="items" :fields="fields" sort-by="Pts" sort-desc></b-table>
+            <b-table striped small :items="items" :fields="fields" sort-by="pts" sort-desc>
+              <template slot="teamname" slot-scope="data">
+                    <router-link :to="`/teams/${data.item.id}`">
+                        {{ data.item.teamname }}
+                    </router-link>
+                </template>
+            </b-table>
         </b-card>
     </b-container>
 </template>
@@ -14,13 +20,16 @@ export default {
   data () {
     return {
       items: [],
-      fields: ['Team', 'Pts', { key: 'Diff', label: '+/-' }]
+      fields: [
+        { key: 'teamname', label: 'Team' },
+        { key: 'pts' }
+      ]
     }
   },
   created() {
     axios
-      .get('https://sffl-data.firebaseio.com/standings.json')
-      .then(response => (this.items = response.data))
+      .get('https://sffl-squigs.c9users.io/api/team/read.php')
+      .then(response => (this.items = response.data.teams))
   }
 }
 </script>

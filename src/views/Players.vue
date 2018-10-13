@@ -23,14 +23,14 @@
                 :items="players"
                 :fields="fields"
                 sort-direction="desc"
-                sort-by="teamID"
+                sort-by="team_id"
                 :per-page="perPage"
                 :current-page="currentPage"
                 :filter="filter"
                 @filtered="onFiltered">
                 <template slot="Name" slot-scope="data">
-                    <router-link :to="`/players/${data.item.ID}`">
-                        <span v-html="data.item.firstname + ' ' + data.item.lastname"></span>
+                    <router-link :to="`/players/${data.item.id}`">
+                        {{ data.item.firstname }} {{ data.item.lastname }}
                     </router-link>
                 </template> 
             </b-table>
@@ -46,7 +46,7 @@ export default {
       players: [],
       fields: [
         { key: 'Name' },
-        { key: 'teamID', label:"Club", sortable: true, sortDirection: 'asc' },
+        { key: 'team_id', label:"Club", sortable: true, sortDirection: 'asc' },
         { key: 'mins', sortable: true },
         { key: 'tackles', sortable: true },
         { key: 'passes', sortable: true },
@@ -63,7 +63,7 @@ export default {
   },
   created() {
     axios
-      .get('https://sffl-data.firebaseio.com/players.json')
+      .get('https://sffl-squigs.c9users.io/api/player/read.php')
       .then(response => {
           this.players = response.data.players
           this.totalRows = this.players.length
