@@ -13,6 +13,9 @@ import AppHeader from '@/components/Header.vue'
 export default {
   components: {
     AppHeader
+  },
+  mounted() {
+    this.$store.dispatch('getPlayers')
   }
 }
 </script>

@@ -30,7 +30,8 @@
                 @filtered="onFiltered">
                 <template slot="Name" slot-scope="data">
                     <router-link :to="`/players/${data.item.id}`">
-                        {{ data.item.firstname }} {{ data.item.lastname }}
+                        <span v-if="data.item.knownas == ''">{{ data.item.firstname }} {{ data.item.lastname }}</span>
+                        <span v-else>{{ data.item.knownas }}</span>
                     </router-link>
                 </template> 
             </b-table>
@@ -43,7 +44,6 @@ import axios from 'axios'
 export default {
   data () {
     return {
-      players: [],
       fields: [
         { key: 'Name' },
         { key: 'team_id', label:"Club", sortable: true, sortDirection: 'asc' },
@@ -61,14 +61,19 @@ export default {
       totalRows: 50
     }
   },
-  created() {
-    axios
-      .get('https://sffl-squigs.c9users.io/api/player/read.php')
-      .then(response => {
-          this.players = response.data.players
-          this.totalRows = this.players.length
-      })
+  computed: {
+      players() {
+          return this.$store.getters.players;
+      }
   },
+//   created() {
+//     axios
+//       .get('https://sffl-squigs.c9users.io/api/player/read.php')
+//       .then(response => {
+//           this.players = response.data.players
+//           this.totalRows = this.players.length
+//       })
+//   },
   methods: {
       onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
