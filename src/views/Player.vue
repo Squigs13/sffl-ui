@@ -9,8 +9,8 @@
             </b-col>
         </b-row>
         <b-row>
-            <b-col>
-                <b-card header="Player Details">
+            <b-col sm="12" md="6">
+                <b-card header="Player Details" no-body>
                     <b-list-group>
                         <b-list-group-item>Club: {{ player.team_id }}</b-list-group-item>
                         <b-list-group-item>Position: {{ player.position }}</b-list-group-item>
@@ -18,11 +18,18 @@
                     </b-list-group>
                 </b-card>
             </b-col>
-            <b-col>
-
-            </b-col>
-            <b-col>
-
+            <b-col sm="12" md="6">
+                <b-card header="Quick Stats" no-body>
+                    <b-list-group>
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">Minutes: <b-badge variant="primary" pill>{{ player.mins }}</b-badge></b-list-group-item>
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">Tackles: <b-badge variant="primary" pill>{{ player.tackles }}</b-badge></b-list-group-item>
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">Passes: <b-badge variant="primary" pill>{{ player.passes }}</b-badge></b-list-group-item>
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">Goals: <b-badge variant="primary" pill>{{ player.goals }}</b-badge></b-list-group-item>
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">Assists: <b-badge variant="primary" pill>{{ player.assists }}</b-badge></b-list-group-item>
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">Clean Sheets: <b-badge variant="primary" pill>{{ player.cleansheets }}</b-badge></b-list-group-item>
+                        <b-list-group-item class="d-flex justify-content-between align-items-center">Team Points: <b-badge variant="primary" pill>{{ player.pts }}</b-badge></b-list-group-item>
+                    </b-list-group>
+                </b-card>
             </b-col>
         </b-row>
     </b-container>
@@ -39,5 +46,7 @@
 </script>
 
 <style>
-
+ .row {
+     padding-bottom: 1rem;
+ }
 </style>
