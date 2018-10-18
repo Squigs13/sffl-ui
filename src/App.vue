@@ -16,6 +16,7 @@ export default {
   },
   mounted() {
     this.$store.dispatch('getPlayers')
+    this.$store.dispatch('getClubs')
   }
 }
 </script>
