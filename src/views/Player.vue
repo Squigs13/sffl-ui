@@ -12,9 +12,10 @@
             <b-col sm="12" md="6">
                 <b-card header="Player Details" no-body>
                     <b-list-group>
-                        <b-list-group-item>Club: {{ player.team_id }}</b-list-group-item>
+                        <b-list-group-item>Club: {{ getClubFromAbbr(player.team_id) }}</b-list-group-item>
                         <b-list-group-item>Position: {{ player.position }}</b-list-group-item>
                         <b-list-group-item>Squad Number: {{ player.shirt_no}}</b-list-group-item>
+                        <b-list-group-item v-if="player.news != ''">Info: {{ player.news }}</b-list-group-item>
                     </b-list-group>
                 </b-card>
             </b-col>
@@ -51,39 +52,50 @@
                 </b-card>
             </b-col>
         </b-row>
+        <b-row>
+            <b-col>
+                <b-card header="History">
+                    <b-table hover small></b-table>
+                </b-card>
+            </b-col>
+        </b-row>
     </b-container>
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                fields: [
-                    {key: 'date'},
-                    {key: 'opponent_id', label: 'Opponent'},
-                    {key: 'score'},
-                    {key: 'mins'},
-                    {key: 'tackles'},
-                    {key: 'passes'},
-                    {key: 'goals'},
-                    {key: 'assists'},
-                    {key: 'cleansheets', label: 'CS'},
-                    {key: 'pts'}
-                ]
-            }
-        },
-        computed: {
-            player() {
-                return this.$store.getters.players.find(element => element.id == this.$route.params.id)
-            }
-        },
-        methods: {
-            getClubName(club_id) {
-                const club = this.$store.getters.clubs.find(element => element.id == club_id)
-                return club.name
-            }
-        }
+export default {
+  data () {
+    return {
+      fields: [
+        { key: 'date' },
+        { key: 'opponent_id', label: 'Opponent' },
+        { key: 'score' },
+        { key: 'mins' },
+        { key: 'tackles' },
+        { key: 'passes' },
+        { key: 'goals' },
+        { key: 'assists' },
+        { key: 'cleansheets', label: 'CS' },
+        { key: 'pts' }
+      ]
     }
+  },
+  computed: {
+    player () {
+      return this.$store.getters.players.find(element => element.id == this.$route.params.id)
+    }
+  },
+  methods: {
+    getClubName (clubId) {
+      const club = this.$store.getters.clubs.find(element => element.id == clubId)
+      return club.name
+    },
+    getClubFromAbbr (clubAbbr) {
+      const club = this.$store.getters.clubs.find(element => element.abbr === clubAbbr)
+      return club.name
+    }
+  }
+}
 </script>
 
 <style>

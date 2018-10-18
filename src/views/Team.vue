@@ -1,8 +1,8 @@
 <template>
     <b-container>
         <b-card bg-variant="light"
-                :header="teamname">
-            <b-table striped small :items="items" :fields="fields">
+                :header="team.teamname">
+            <b-table striped small :items="team.squad" :fields="fields">
               <template slot="Name" slot-scope="data">
                     <router-link :to="`/players/${data.item.id}`">
                         <span v-if="data.item.known == ''">{{ data.item.first }} {{ data.item.last }}</span>
@@ -15,27 +15,20 @@
 </template>
 
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
-      items: [],
       fields: [
         { key: 'Name' },
-        { key: 'club', label:"Club", sortable: true, sortDirection: 'asc' },
+        { key: 'club', label: 'Club', sortable: true, sortDirection: 'asc' },
         { key: 'position', sortable: true }
-      ],
-      teamname: ""
+      ]
     }
   },
-  created() {
-    axios
-      .get('https://sffl-squigs.c9users.io/api/team/readOne.php?id=' + this.$route.params.id)
-      .then(response => {
-          this.items = response.data.squad
-          this.teamname = response.data.name
-      })
+  computed: {
+    team () {
+      return this.$store.getters.teams.find(element => element.id == this.$route.params.id)
+    }
   }
 }
 </script>

@@ -14,9 +14,10 @@ export default {
   components: {
     AppHeader
   },
-  mounted() {
+  mounted () {
     this.$store.dispatch('getPlayers')
     this.$store.dispatch('getClubs')
+    this.$store.dispatch('getTeams')
   }
 }
 </script>

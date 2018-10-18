@@ -16,7 +16,7 @@
             </b-col>
         </b-row>
         <b-card>
-            <b-table 
+            <b-table
                 responsive
                 striped
                 bordered
@@ -33,26 +33,25 @@
                         <span v-if="data.item.knownas == ''">{{ data.item.firstname }} {{ data.item.lastname }}</span>
                         <span v-else>{{ data.item.knownas }}</span>
                     </router-link>
-                </template> 
+                </template>
             </b-table>
         </b-card>
     </b-container>
 </template>
 <script>
-import axios from 'axios'
-
 export default {
   data () {
     return {
       fields: [
         { key: 'Name' },
-        { key: 'team_id', label:"Club", sortable: true, sortDirection: 'asc' },
+        { key: 'position', label: 'Pos' },
+        { key: 'team_id', label: 'Club', sortable: true, sortDirection: 'asc' },
         { key: 'mins', sortable: true },
         { key: 'tackles', sortable: true },
         { key: 'passes', sortable: true },
         { key: 'goals', sortable: true },
         { key: 'assists', sortable: true },
-        { key: 'cleansheets', label: "CS", sortable: true },
+        { key: 'cleansheets', label: 'CS', sortable: true },
         { key: 'pts', sortable: true }
       ],
       currentPage: 1,
@@ -62,20 +61,12 @@ export default {
     }
   },
   computed: {
-      players() {
-          return this.$store.getters.players;
-      }
+    players () {
+      return this.$store.getters.players
+    }
   },
-//   created() {
-//     axios
-//       .get('https://sffl-squigs.c9users.io/api/player/read.php')
-//       .then(response => {
-//           this.players = response.data.players
-//           this.totalRows = this.players.length
-//       })
-//   },
   methods: {
-      onFiltered (filteredItems) {
+    onFiltered (filteredItems) {
       // Trigger pagination to update the number of buttons/pages due to filtering
       this.totalRows = filteredItems.length
       this.currentPage = 1
