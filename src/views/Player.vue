@@ -55,7 +55,14 @@
         <b-row>
             <b-col>
                 <b-card header="History">
-                    <b-table hover small></b-table>
+                    <b-table hover small :items="player.history" :fields="historyFields">
+                        <template slot="season_id" slot-scope="data">
+                            {{ getSeason(data.item.season_id) }}
+                        </template>
+                        <template slot="club_id" slot-scope="data">
+                            {{ getClubName(data.item.club_id) }}
+                        </template>
+                    </b-table>
                 </b-card>
             </b-col>
         </b-row>
@@ -70,6 +77,17 @@ export default {
         { key: 'date' },
         { key: 'opponent_id', label: 'Opponent' },
         { key: 'score' },
+        { key: 'mins' },
+        { key: 'tackles' },
+        { key: 'passes' },
+        { key: 'goals' },
+        { key: 'assists' },
+        { key: 'cleansheets', label: 'CS' },
+        { key: 'pts' }
+      ],
+      historyFields: [
+        { key: 'season_id', label: 'Season' },
+        { key: 'club_id', label: 'Club' },
         { key: 'mins' },
         { key: 'tackles' },
         { key: 'passes' },
@@ -93,6 +111,11 @@ export default {
     getClubFromAbbr (clubAbbr) {
       const club = this.$store.getters.clubs.find(element => element.abbr === clubAbbr)
       return club.name
+    },
+    getSeason (seasonId) {
+      const slice = seasonId.slice(2)
+      const endYear = parseInt(slice) + 1
+      return seasonId + '/' + endYear
     }
   }
 }
