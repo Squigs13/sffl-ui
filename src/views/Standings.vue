@@ -3,9 +3,9 @@
         <b-card bg-variant="light"
                 header="Current Standings">
             <b-table striped small :items="teams" :fields="fields" sort-by="pts" sort-desc>
-              <template slot="teamname" slot-scope="data">
+              <template slot="name" slot-scope="data">
                     <router-link :to="`/teams/${data.item.id}`">
-                        {{ data.item.teamname }}
+                        {{ data.item.name }}
                     </router-link>
                 </template>
             </b-table>
@@ -18,7 +18,7 @@ export default {
   data () {
     return {
       fields: [
-        { key: 'teamname', label: 'Team' },
+        { key: 'name', label: 'Team' },
         { key: 'pts' }
       ]
     }
