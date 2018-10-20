@@ -36,7 +36,7 @@
         <b-row>
             <b-col>
                 <b-card header="Detailed Stats">
-                    <b-table hover small :items="player.stats" :fields="fields">
+                    <b-table hover small :items="stats" :fields="fields">
                         <template slot="date" slot-scope="data">
                             {{ data.item.date | moment("DD MMM") }}
                         </template>
@@ -55,7 +55,7 @@
         <b-row>
             <b-col>
                 <b-card header="History">
-                    <b-table hover small :items="player.history" :fields="historyFields">
+                    <b-table hover small :items="history" :fields="historyFields">
                         <template slot="season_id" slot-scope="data">
                             {{ getSeason(data.item.season_id) }}
                         </template>
@@ -70,9 +70,13 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
   data () {
     return {
+      stats: [],
+      history: [],
       fields: [
         { key: 'date' },
         { key: 'opponent_id', label: 'Opponent' },
@@ -117,6 +121,14 @@ export default {
       const endYear = parseInt(slice) + 1
       return seasonId + '/' + endYear
     }
+  },
+  created() {
+      axios
+        .get('https://sffl-squigs.c9users.io/api/player/readOne.php?id=' + this.$route.params.id)
+        .then(response => {
+          this.history = response.data.history
+          this.stats = response.data.stats
+        })
   }
 }
 </script>
