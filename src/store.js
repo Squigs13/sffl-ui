@@ -13,21 +13,21 @@ export default new Vuex.Store({
   mutations: {
     'GET_PLAYERS' (state) {
       axios
-        .get('https://sffl-squigs.c9users.io/api/player/read.php')
+        .get('http://api.thesffl.co.uk/player/read.php')
         .then(response => {
           state.players = response.data.players
         })
     },
     'GET_CLUBS' (state) {
       axios
-        .get('https://sffl-squigs.c9users.io/api/club/read.php')
+        .get('http://api.thesffl.co.uk/club/read.php')
         .then(response => {
           state.clubs = response.data.clubs
         })
     },
     'GET_TEAMS' (state) {
       axios
-        .get('https://sffl-squigs.c9users.io/api/team/read.php')
+        .get('http://api.thesffl.co.uk/team/read.php')
         .then(response => {
           state.teams = response.data.teams
         })

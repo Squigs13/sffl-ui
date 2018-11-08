@@ -58,9 +58,9 @@ export default {
   },
   created() {
     axios
-      .get('https://sffl-squigs.c9users.io/api/team/readOne.php?id=' + this.$route.params.id)
+      .get('http://api.thesffl.co.uk/team/readOne.php?id=' + this.$route.params.id)
       .then(response => {
-        this.lineup = response.data.lineup
+        this.lineup = response.data.lineup.players
       })
   }
 }

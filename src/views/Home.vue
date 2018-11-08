@@ -1,8 +1,8 @@
 <template>
   <b-container class="home">
-    <b-jumbotron header="Bootstrap Vue" lead="Bootstrap 4 Components for Vue.js 2" >
-      <p>For more information visit website</p>
-      <b-btn variant="primary" to="/login">Log In</b-btn>
+    <b-jumbotron header="SFFL UI" lead="An updated UI using Bootstrap 4 and VueJS" >
+      <p>This is a work in progress</p>
+      <b-btn variant="primary" to="/standings">League Standings</b-btn>
     </b-jumbotron>
   </b-container>
 </template>
