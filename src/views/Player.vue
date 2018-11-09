@@ -36,7 +36,7 @@
         <b-row>
             <b-col>
                 <b-card header="Detailed Stats">
-                    <b-table hover small :items="stats" :fields="fields">
+                    <b-table hover small responsive :items="stats" :fields="fields">
                         <template slot="date" slot-scope="data">
                             {{ data.item.date | moment("DD MMM") }}
                         </template>
@@ -55,7 +55,7 @@
         <b-row>
             <b-col>
                 <b-card header="History">
-                    <b-table hover small :items="history" :fields="historyFields">
+                    <b-table hover small responsive :items="history" :fields="historyFields">
                         <template slot="season_id" slot-scope="data">
                             {{ getSeason(data.item.season_id) }}
                         </template>

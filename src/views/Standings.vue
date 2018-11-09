@@ -2,7 +2,7 @@
     <b-container>
         <b-card bg-variant="light"
                 header="Current Standings">
-            <b-table striped small :items="teams" :fields="fields" sort-by="pts" sort-desc>
+            <b-table striped small responsive :items="teams" :fields="fields" sort-by="pts" sort-desc>
               <template slot="name" slot-scope="data">
                     <router-link :to="`/teams/${data.item.id}`">
                         {{ data.item.name }}

@@ -2,7 +2,7 @@
     <b-container>
         <b-card bg-variant="light"
                 :header="team.name">
-            <b-table striped small :items="lineup" :fields="fields">
+            <b-table striped small responsive :items="lineup" :fields="fields">
               <template slot="player_id" slot-scope="data">
                     <router-link :to="`/players/${data.item.player_id}`">
                         {{ getPlayerName(data.item.player_id) }}
