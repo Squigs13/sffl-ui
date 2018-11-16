@@ -47,19 +47,19 @@
                             </router-link>
                         </template>
                         <template slot="M" slot-scope="data">
-                            {{ getMinsPlayed(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'mins_played') }}
                         </template>
                         <template slot="T" slot-scope="data">
-                            {{ getTackles(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'saves') + getStatValue(data.item['Stat'], 'won_tackle') + getStatValue(data.item['Stat'], 'interception_won') + getStatValue(data.item['Stat'], 'effective_clearance') }}
                         </template>
                         <template slot="P" slot-scope="data">
-                            {{ getPasses(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'accurate_pass') }}
                         </template>
                         <template slot="G" slot-scope="data">
-                            {{ getGoalsScored(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'goals') }}
                         </template>
                         <template slot="A" slot-scope="data">
-                            {{ getGoalAssists(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'goal_assist') }}
                         </template>
                     </b-table>
                 </b-card>
@@ -74,19 +74,19 @@
                             </router-link>
                         </template>
                         <template slot="M" slot-scope="data">
-                            {{ getMinsPlayed(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'mins_played') }}
                         </template>
                         <template slot="T" slot-scope="data">
-                            {{ getTackles(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'saves') + getStatValue(data.item['Stat'], 'won_tackle') + getStatValue(data.item['Stat'], 'interception_won') + getStatValue(data.item['Stat'], 'effective_clearance') }}
                         </template>
                         <template slot="P" slot-scope="data">
-                            {{ getPasses(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'accurate_pass') }}
                         </template>
                         <template slot="G" slot-scope="data">
-                            {{ getGoalsScored(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'goals') }}
                         </template>
                         <template slot="A" slot-scope="data">
-                            {{ getGoalAssists(data.item['Stat']) }}
+                            {{ getStatValue(data.item['Stat'], 'goal_assist') }}
                         </template>
                     </b-table>
                 </b-card>
@@ -126,55 +126,14 @@ export default {
                 return player.knownas
             }
         },
-        getMinsPlayed(stats) {
+        getStatValue(stats, statType) {
             const statArray = Array.from(stats)
-            const mins = statArray.find(element => element['@Type'] === 'mins_played')
-            if (typeof(mins) != 'undefined') {
-                return mins['$']
+            const statValue = statArray.find(element => element['@Type'] === statType)
+            if (typeof(statValue) != 'undefined') {
+                return parseInt(statValue['$'])
             } else {
                 return 0
             }
-        },
-        getGoalsScored(stats) {
-            const statArray = Array.from(stats)
-            const goals = statArray.find(element => element['@Type'] === 'goals')
-            if (typeof(goals) != 'undefined') {
-                return goals['$']
-            } else {
-                return 0
-            }
-        },
-        getGoalAssists(stats) {
-            const statArray = Array.from(stats)
-            const assists = statArray.find(element => element['@Type'] === 'goal_assist')
-            if (typeof(assists) != 'undefined') {
-                return assists['$']
-            } else {
-                return 0
-            }
-        },
-        getPasses(stats) {
-            const statArray = Array.from(stats)
-            const passes = statArray.find(element => element['@Type'] === 'accurate_pass')
-            if (typeof(passes) != 'undefined') {
-                return passes['$']
-            } else {
-                return 0
-            }
-        },
-        getTackles(stats) {
-            const statArray = Array.from(stats)
-            const saves = statArray.find(element => element['@Type'] === 'saves')
-            const tackles = statArray.find(element => element['@Type'] === 'won_tackle')
-            const interceptions = statArray.find(element => element['@Type'] === 'interception_won')
-            const clearances = statArray.find(element => element['@Type'] === 'effective_clearance')
-            var total = 0
-            total += (typeof(saves) != 'undefined') ? parseInt(saves['$']) : 0 
-            total += (typeof(tackles) != 'undefined') ? parseInt(tackles['$']) : 0
-            total += (typeof(interceptions) != 'undefined') ? parseInt(interceptions['$']) : 0 
-            total += (typeof(clearances) != 'undefined') ? parseInt(clearances['$']) : 0
-            
-            return total
         }
     },
     created() {
