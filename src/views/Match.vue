@@ -7,12 +7,12 @@
                     <div class="text-right" v-if="matchData.TeamData[0].Goal">
                         <ul v-if="matchData.TeamData[0].Goal.length">
                             <li v-for="goal in matchData.TeamData[0].Goal">
-                                {{ getPlayerName(goal['@PlayerRef'].substring(1)) }} '{{ goal['@Min'] }}
+                                {{ getGoalDetails(goal) }}
                             </li>
                         </ul>
                         <ul v-else>
                             <li>
-                                {{ getPlayerName(matchData.TeamData[0].Goal['@PlayerRef'].substring(1)) }} '{{ matchData.TeamData[0].Goal['@Min'] }} 
+                                {{ getGoalDetails(matchData.TeamData[0].Goal) }} 
                             </li>
                         </ul>
                     </div>
@@ -24,12 +24,12 @@
                     <div class="text-right" v-if="matchData.TeamData[1].Goal">
                         <ul v-if="matchData.TeamData[1].Goal.length">
                             <li v-for="goal in matchData.TeamData[1].Goal">
-                                {{ getPlayerName(goal['@PlayerRef'].substring(1)) }} '{{ goal['@Min'] }}
+                                {{ getGoalDetails(goal) }}
                             </li>
                         </ul>
                         <ul v-else>
                             <li>
-                                {{ getPlayerName(matchData.TeamData[1].Goal['@PlayerRef'].substring(1)) }} '{{ matchData.TeamData[1].Goal['@Min'] }} 
+                                {{ getGoalDetails(matchData.TeamData[1].Goal) }} 
                             </li>
                         </ul>
                     </div>
@@ -133,6 +133,25 @@ export default {
                 return parseInt(statValue['$'])
             } else {
                 return 0
+            }
+        },
+        getGoalDetails(goal) {
+            const scorerId = goal['@PlayerRef'].substring(1)
+            const scorerName = this.getPlayerName(scorerId)
+            const goalMinute = goal['@Min']
+            const goalType = goal['@Type']
+
+            if (goalType === 'Own') {
+                return scorerName + " (O.G.) - '" + goalMinute
+            }
+
+            if (goal.Assist) {
+                let assistId = goal.Assist['@PlayerRef'].substring(1)
+                let assistName = this.getPlayerName(assistId)
+
+                return scorerName + " (" + assistName + ") - '" + goalMinute
+            } else {
+                return scorerName + " - '" + goalMinute
             }
         }
     },
