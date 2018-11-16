@@ -1,5 +1,5 @@
 <template>
-    <b-container>
+    <b-container v-if="teamData.length > 0">
         <b-row>
             <b-col sm="12" md="6">
                 <b-card>

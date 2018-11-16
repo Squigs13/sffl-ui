@@ -50,6 +50,11 @@ export default new Router({
       path: '/match/:id',
       name: 'match',
       component: () => import(/* webpackChunkName: "match" */ './views/Match.vue')
+    },
+    {
+      path: '/fixtures',
+      name: 'fixtures',
+      component: () => import(/* webpackChunkName: "fixtures" */ './views/Fixtures.vue')
     }
   ]
 })

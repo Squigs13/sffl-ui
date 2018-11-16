@@ -18,6 +18,7 @@
                 <b-nav-item-dropdown text="League">
                     <b-dropdown-item to="/standings">Standings</b-dropdown-item>
                     <b-dropdown-item to="/players">Players</b-dropdown-item>
+                    <b-dropdown-item to="/fixtures">Fixtures & Results</b-dropdown-item>
                     <!-- <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item href="#">Live</b-dropdown-item>
                     <b-dropdown-divider></b-dropdown-divider>
