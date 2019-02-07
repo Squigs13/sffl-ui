@@ -124,7 +124,7 @@ export default {
   },
   created() {
       axios
-        .get('http://api.thesffl.co.uk/player/readOne.php?id=' + this.$route.params.id)
+        .get('https://www.thesffl.co.uk/api/player/readOne.php?id=' + this.$route.params.id)
         .then(response => {
           this.history = response.data.history
           this.stats = response.data.stats

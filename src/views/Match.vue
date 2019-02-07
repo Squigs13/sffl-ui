@@ -165,7 +165,7 @@ export default {
     },
     created() {
         axios
-      .get('http://api.thesffl.co.uk/match/readOne.php?id=' + this.$route.params.id)
+      .get('https://www.thesffl.co.uk/api/match/readOne.php?id=' + this.$route.params.id)
       .then(response => {
         this.matchData = response.data.SoccerFeed.SoccerDocument.MatchData
         this.teamData = response.data.SoccerFeed.SoccerDocument.Team

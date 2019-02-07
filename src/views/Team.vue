@@ -58,7 +58,7 @@ export default {
   },
   created() {
     axios
-      .get('http://api.thesffl.co.uk/team/readOne.php?id=' + this.$route.params.id)
+      .get('https://www.thesffl.co.uk/api/team/readOne.php?id=' + this.$route.params.id)
       .then(response => {
         this.lineup = response.data.lineup.players
       })

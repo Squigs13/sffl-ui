@@ -74,7 +74,7 @@ export default {
     },
     created() {
         axios
-      .get('https://sffl-squigs.c9users.io/api/fixture/read.php?season=2018')
+      .get('https://www.thesffl.co.uk/api/fixture/read.php?season=2018')
       .then(response => {
         this.fixtures = response.data.fixtures
         this.week = response.data.current_week
