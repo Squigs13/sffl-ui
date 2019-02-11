@@ -15,7 +15,7 @@
                     <b-dropdown-divider></b-dropdown-divider>
                     <b-dropdown-item href="#">Profile</b-dropdown-item>
                 </b-nav-item-dropdown> -->
-                <b-nav-item-dropdown text="League">
+                <b-nav-item-dropdown text="League" v-if="isLoggedIn">
                     <b-dropdown-item to="/standings">Standings</b-dropdown-item>
                     <b-dropdown-item to="/players">Players</b-dropdown-item>
                     <b-dropdown-item to="/fixtures">Fixtures & Results</b-dropdown-item>
@@ -33,8 +33,8 @@
                 <b-nav-item-dropdown text="Admin" v-if="isAdmin">
                     <b-dropdown-item href="#">Users</b-dropdown-item>
                     <b-dropdown-item href="#">Teams</b-dropdown-item>
-                </b-nav-item-dropdown>
-                <b-nav-item v-if="isLoggedIn" @click="logOut">Logout</b-nav-item> -->
+                </b-nav-item-dropdown> -->
+                <b-nav-item v-if="isLoggedIn" @click="logout">Logout</b-nav-item>
                 </b-navbar-nav>
 
             </b-collapse>
@@ -46,13 +46,17 @@
 export default {
   data () {
     return {
-      isAdmin: true,
-      isLoggedIn: true
+      isAdmin: true
+    }
+  },
+  computed: {
+    isLoggedIn () {
+      return this.$store.getters.isAuthenticated
     }
   },
   methods: {
-    logOut () {
-      this.isLoggedIn = false
+    logout: function () {
+      this.$store.dispatch('logout')
     }
   }
 }

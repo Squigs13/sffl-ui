@@ -1,19 +1,34 @@
 <template>
-    <b-form class="form-signin">
+    <b-form class="form-signin" @submit.prevent="login">
       <h1 class="h3 mb-3 font-weight-normal">Please sign in</h1>
       <label for="inputEmail" class="sr-only">Email address</label>
-      <b-form-input type="email" id="inputEmail" placeholder="Email address" required="" autofocus=""></b-form-input>
+      <b-form-input type="email" id="inputEmail" placeholder="Email address" required="" autofocus="" v-model="email"></b-form-input>
       <label for="inputPassword" class="sr-only">Password</label>
-      <b-form-input type="password" id="inputPassword" placeholder="Password" required=""></b-form-input>
+      <b-form-input type="password" id="inputPassword" placeholder="Password" required="" v-model="password"></b-form-input>
       <div class="checkbox mb-3">
           <b-form-checkbox value="remember-me">Remember me</b-form-checkbox>
       </div>
-      <b-button size="lg" variant="primary" block="true" type="submit">Sign in</b-button>
+      <b-button size="lg" variant="primary" block type="submit">Sign in</b-button>
     </b-form>
 </template>
 
 <script>
-export default {}
+export default {
+  data () {
+    return {
+      email: '',
+      password: ''
+    }
+  },
+  methods: {
+    login: function () {
+      const { email, password } = this
+      this.$store.dispatch('login', { email, password }).then(() => {
+        this.$router.push('/')
+      })
+    }
+  }
+}
 </script>
 
 <style>

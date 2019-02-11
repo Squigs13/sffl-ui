@@ -12,7 +12,7 @@
                         </ul>
                         <ul v-else>
                             <li>
-                                {{ getGoalDetails(matchData.TeamData[0].Goal) }} 
+                                {{ getGoalDetails(matchData.TeamData[0].Goal) }}
                             </li>
                         </ul>
                     </div>
@@ -29,7 +29,7 @@
                         </ul>
                         <ul v-else>
                             <li>
-                                {{ getGoalDetails(matchData.TeamData[1].Goal) }} 
+                                {{ getGoalDetails(matchData.TeamData[1].Goal) }}
                             </li>
                         </ul>
                     </div>
@@ -41,7 +41,7 @@
                 <b-card :header="teamData[0].Name + ' Stats'" no-body>
                     <b-table class="match-lineup" small responsive hover :items="matchData.TeamData[0].PlayerLineUp.MatchPlayer" :fields="lineupFields">
                         <template slot="@PlayerRef" slot-scope="data">
-                            {{ data.item['@ShirtNumber'] }}. 
+                            {{ data.item['@ShirtNumber'] }}.
                             <router-link :to="`/players/${data.item['@PlayerRef'].substring(1)}`">
                                 {{ getPlayerName(data.item['@PlayerRef'].substring(1)) }}
                             </router-link>
@@ -72,7 +72,7 @@
                 <b-card :header="teamData[1].Name + ' Stats'" no-body>
                     <b-table class="match-lineup" small responsive hover :items="matchData.TeamData[1].PlayerLineUp.MatchPlayer" :fields="lineupFields">
                         <template slot="@PlayerRef" slot-scope="data">
-                            {{ data.item['@ShirtNumber'] }}. 
+                            {{ data.item['@ShirtNumber'] }}.
                             <router-link :to="`/players/${data.item['@PlayerRef'].substring(1)}`">
                                 {{ getPlayerName(data.item['@PlayerRef'].substring(1)) }}
                             </router-link>
@@ -107,74 +107,73 @@
 import axios from 'axios'
 
 export default {
-    data() {
-        return {
-            matchData: {
-                MatchInfo: {
-                    Attendance: ""
-                }
-            },
-            teamData: [],
-            lineupFields: [
-                { key: '@PlayerRef', label: '' },
-                { key: 'M'},
-                { key: 'T'},
-                { key: 'P'},
-                { key: 'G'},
-                { key: 'A'}
-            ]
+  data () {
+    return {
+      matchData: {
+        MatchInfo: {
+          Attendance: ''
         }
+      },
+      teamData: [],
+      lineupFields: [
+        { key: '@PlayerRef', label: '' },
+        { key: 'M' },
+        { key: 'T' },
+        { key: 'P' },
+        { key: 'G' },
+        { key: 'A' }
+      ]
+    }
+  },
+  methods: {
+    getPlayerName (playerId) {
+      const player = this.$store.getters.players.find(element => element.id == playerId)
+      if (player.knownas == '') {
+        return player.firstname.substring(0, 1) + '. ' + player.lastname
+      } else {
+        return player.knownas
+      }
     },
-    methods: {
-        getPlayerName(playerId) {
-            const player = this.$store.getters.players.find(element => element.id == playerId)
-            if (player.knownas == '') {
-                return player.firstname.substring(0, 1) + '. ' + player.lastname
-            } else {
-                return player.knownas
-            }
-        },
-        getStatValue(stats, statType) {
-            const statArray = Array.from(stats)
-            const statValue = statArray.find(element => element['@Type'] === statType)
-            if (typeof(statValue) != 'undefined') {
-                return parseInt(statValue['$'])
-            } else {
-                return 0
-            }
-        },
-        getGoalDetails(goal) {
-            const scorerId = goal['@PlayerRef'].substring(1)
-            const scorerName = this.getPlayerName(scorerId)
-            const goalMinute = goal['@Min']
-            const goalType = goal['@Type']
-
-            if (goalType === 'Own') {
-                return scorerName + " (O.G.) - '" + goalMinute
-            }
-
-            if (goal.Assist) {
-                let assistId = goal.Assist['@PlayerRef'].substring(1)
-                let assistName = this.getPlayerName(assistId)
-
-                return scorerName + " (" + assistName + ") - '" + goalMinute
-            } else {
-                return scorerName + " - '" + goalMinute
-            }
-        }
+    getStatValue (stats, statType) {
+      const statArray = Array.from(stats)
+      const statValue = statArray.find(element => element['@Type'] === statType)
+      if (typeof (statValue) !== 'undefined') {
+        return parseInt(statValue['$'])
+      } else {
+        return 0
+      }
     },
-    created() {
-        axios
+    getGoalDetails (goal) {
+      const scorerId = goal['@PlayerRef'].substring(1)
+      const scorerName = this.getPlayerName(scorerId)
+      const goalMinute = goal['@Min']
+      const goalType = goal['@Type']
+
+      if (goalType === 'Own') {
+        return scorerName + " (O.G.) - '" + goalMinute
+      }
+
+      if (goal.Assist) {
+        let assistId = goal.Assist['@PlayerRef'].substring(1)
+        let assistName = this.getPlayerName(assistId)
+
+        return scorerName + ' (' + assistName + ") - '" + goalMinute
+      } else {
+        return scorerName + " - '" + goalMinute
+      }
+    }
+  },
+  created () {
+    axios
       .get('https://www.thesffl.co.uk/api/match/readOne.php?id=' + this.$route.params.id)
       .then(response => {
         this.matchData = response.data.SoccerFeed.SoccerDocument.MatchData
         this.teamData = response.data.SoccerFeed.SoccerDocument.Team
       })
-    }
+  }
 }
 </script>
 <style>
 li {list-style: none;}
 .match-lineup tr:nth-of-type(11) { border-bottom: 2px solid black; }
 </style>
-

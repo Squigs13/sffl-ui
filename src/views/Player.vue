@@ -122,13 +122,13 @@ export default {
       return seasonId + '/' + endYear
     }
   },
-  created() {
-      axios
-        .get('https://www.thesffl.co.uk/api/player/readOne.php?id=' + this.$route.params.id)
-        .then(response => {
-          this.history = response.data.history
-          this.stats = response.data.stats
-        })
+  created () {
+    axios
+      .get('https://www.thesffl.co.uk/api/player/readOne.php?id=' + this.$route.params.id)
+      .then(response => {
+        this.history = response.data.history
+        this.stats = response.data.stats
+      })
   }
 }
 </script>

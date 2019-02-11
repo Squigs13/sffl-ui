@@ -39,7 +39,7 @@ export default {
     }
   },
   methods: {
-    getPlayerName(playerId) {
+    getPlayerName (playerId) {
       const player = this.$store.getters.players.find(element => element.id == playerId)
       if (player.knownas == '') {
         return player.firstname + ' ' + player.lastname
@@ -47,16 +47,16 @@ export default {
         return player.knownas
       }
     },
-    getPlayerPosition(playerId) {
+    getPlayerPosition (playerId) {
       const player = this.$store.getters.players.find(element => element.id == playerId)
       return player.position
     },
-    getPlayerClub(playerId) {
+    getPlayerClub (playerId) {
       const player = this.$store.getters.players.find(element => element.id == playerId)
       return player.team_id
     }
   },
-  created() {
+  created () {
     axios
       .get('https://www.thesffl.co.uk/api/team/readOne.php?id=' + this.$route.params.id)
       .then(response => {

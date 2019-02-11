@@ -15,9 +15,12 @@ export default {
     AppHeader
   },
   mounted () {
-    this.$store.dispatch('getPlayers')
-    this.$store.dispatch('getClubs')
-    this.$store.dispatch('getTeams')
+    // this.$store.dispatch('getPlayers')
+    // this.$store.dispatch('getClubs')
+    // this.$store.dispatch('getTeams')
+  },
+  created () {
+    this.$store.dispatch('tryAutoLogin')
   }
 }
 </script>

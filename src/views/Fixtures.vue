@@ -4,7 +4,7 @@
             <b-col>
                 <b-card>
                     <h2 class="text-center">Fixtures & Results</h2>
-                    <b-pagination align="center" v-model="week" :total-rows="totalRows" :per-page="perPage"> 
+                    <b-pagination align="center" v-model="week" :total-rows="totalRows" :per-page="perPage">
 
                     </b-pagination>
                 </b-card>
@@ -35,7 +35,7 @@
                     </b-list-group>
                 </b-card>
             </b-col>
-            
+
         </b-row>
     </b-container>
 </template>
@@ -44,42 +44,42 @@
 import axios from 'axios'
 
 export default {
-    data() {
-        return {
-            fixtures: [],
-            week: 1,
-            perPage: 1,
-            totalRows: 38
-        }
+  data () {
+    return {
+      fixtures: [],
+      week: 1,
+      perPage: 1,
+      totalRows: 38
+    }
+  },
+  computed: {
+    filteredFixtures () {
+      let filtered = this.fixtures
+      if (this.week) {
+        filtered = this.fixtures.filter(
+          f => f.week === this.week
+        )
+      }
+      return filtered
     },
-    computed: {
-        filteredFixtures() {
-            let filtered = this.fixtures;
-            if (this.week) {
-                filtered = this.fixtures.filter(
-                    f => f.week === this.week
-                );
-            }
-            return filtered
-        },
-        currentWeek() {
-            return "Week " + this.week
-        }
-    },
-    methods: {
-        getClubFromAbbr (clubAbbr) {
-            const club = this.$store.getters.clubs.find(element => element.abbr === clubAbbr)
-            return club.short_name
-        }
-    },
-    created() {
-        axios
+    currentWeek () {
+      return 'Week ' + this.week
+    }
+  },
+  methods: {
+    getClubFromAbbr (clubAbbr) {
+      const club = this.$store.getters.clubs.find(element => element.abbr === clubAbbr)
+      return club.short_name
+    }
+  },
+  created () {
+    axios
       .get('https://www.thesffl.co.uk/api/fixture/read.php?season=2018')
       .then(response => {
         this.fixtures = response.data.fixtures
         this.week = response.data.current_week
       })
-    }
+  }
 }
 </script>
 
