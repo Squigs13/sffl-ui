@@ -60,7 +60,7 @@ export default new Vuex.Store({
       commit('GET_TEAMS')
     },
     login ({ commit, dispatch }, authData) {
-      axios.post('https://sffl-squigs.c9users.io/api/user/login.php', {
+      axios.post('https://www.thesffl.co.uk/api/user/login.php', {
         email: authData.email,
         password: authData.password,
         returnSecureToken: true
