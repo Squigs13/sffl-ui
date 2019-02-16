@@ -11,6 +11,25 @@
         <b-row>
             <b-col sm="12" md="6">
                 <b-card header="Player Details" no-body>
+                    <div class="shirt" :class="player.team_id">
+                        <svg viewBox="0 0 500 500">
+                            <path id="curve" d="M10, 210 Q 249.5, -10, 489, 210" />
+                            <path id="number" d="M0,390 L500, 390" />
+                            <text width="500" text-anchor="middle">
+                                <textPath xlink:href="#curve" startOffset="50%" v-if="player.knownas == ''">
+                                    {{ player.lastname }}
+                                </textPath>
+                                <textPath xlink:href="#curve" startOffset="50%" v-else>
+                                    {{ player.knownas }}
+                                </textPath>
+                            </text>
+                            <text width="500" text-anchor="middle" class="number">
+                                <textPath xlink:href="#number" startOffset="50%">
+                                    {{ player.shirt_no }}
+                                </textPath>
+                            </text>
+                        </svg>
+                    </div>
                     <b-list-group>
                         <b-list-group-item>Club: {{ getClubFromAbbr(player.team_id) }}</b-list-group-item>
                         <b-list-group-item>Position: {{ player.position }}</b-list-group-item>
@@ -137,4 +156,129 @@ export default {
  .row {
      padding-bottom: 1rem;
  }
+
+path {
+  fill: transparent;
+}
+
+text {
+  fill: white;
+  stroke: black;
+  stroke-width: 2;
+}
+
+.shirt {
+  font-family: 'Anton', sans-serif;
+  font-size: 55px;
+  text-transform: uppercase;
+  width: 200px;
+  height: 200px;
+  background-color: beige;
+  border-radius: 10px;
+  border: 3px solid black;
+  margin: 5px auto;
+}
+
+.number {
+  font-size: 280px;
+  stroke-width: 5;
+}
+.shirt.LIV,
+.shirt.ARS,
+.shirt.MNU {
+    background-color: red;
+}
+.shirt.CHE,
+.shirt.EVE,
+.shirt.CAR,
+.shirt.LEI {
+    background-color: royalblue;
+}
+.shirt.MCY {
+    background-color: deepskyblue;
+}
+.shirt.TOT,
+.shirt.FUL {
+    background-color: #f9f9f9;
+}
+.shirt.BUR,
+.shirt.WHU {
+    background-color: darkred;
+}
+.shirt.WOL {
+    background-color: #ebc03a;
+}
+.shirt.WAT {
+    background: repeating-linear-gradient(
+  to right,
+  #f9dc38,
+  #f9dc38 28px,
+  #000000 28px,
+  #000000 56px
+);
+}
+.shirt.PAL {
+    background: repeating-linear-gradient(
+  to right,
+  blue,
+  blue 40px,
+  red 40px,
+  red 80px
+);
+}
+.shirt.BHA {
+    background: repeating-linear-gradient(
+  to right,
+  blue,
+  blue 40px,
+  white 40px,
+  white 80px
+);
+}
+.shirt.HUD {
+    background: repeating-linear-gradient(
+  to right,
+  white,
+  white 28px,
+  #218ed8 28px,
+  #218ed8 56px
+);
+}
+.shirt.BOU {
+    background: repeating-linear-gradient(
+  to right,
+  black,
+  black 28px,
+  red 28px,
+  red 56px
+);
+}
+.shirt.STH {
+    background: repeating-linear-gradient(
+  to right,
+  white,
+  white 28px,
+  red 28px,
+  red 56px
+);
+}
+.shirt.NEW {
+    background: repeating-linear-gradient(
+  to right,
+  black,
+  black 28px,
+  white 28px,
+  white 56px
+);
+}
+.TOT text {
+  fill: navy;
+  stroke: white;
+}
+.FUL text,
+.WOL text {
+  fill: black;
+  stroke: white;
+}
 </style>
+
