@@ -100,7 +100,7 @@ export default new Vuex.Store({
       if (!token) {
         return
       }
-      const expirationDate = localStorage.getItem('expirationDate')
+      const expirationDate = new Date(localStorage.getItem('expirationDate'))
       const now = new Date()
       if (now >= expirationDate) {
         return
